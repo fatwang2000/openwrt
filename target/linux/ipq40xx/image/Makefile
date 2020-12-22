@@ -648,6 +648,38 @@ define Device/openmesh_a62
 endef
 TARGET_DEVICES += openmesh_a62
 
+define Device/plasmacloud_pa1200
+	$(call Device/FitImageLzma)
+	DEVICE_VENDOR := Plasma Cloud
+	DEVICE_MODEL := PA1200
+	SOC := qcom-ipq4018
+	DEVICE_DTS_CONFIG := config@pc.pa1200
+	BLOCKSIZE := 64k
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+	IMAGE_SIZE := 15616k
+	IMAGES += factory.bin
+	IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=PA1200
+	IMAGE/sysupgrade.bin/squashfs := append-rootfs | pad-rootfs | sysupgrade-tar rootfs=$$$$@ | append-metadata
+	DEVICE_PACKAGES := uboot-envtools ipq-wifi-plasmacloud-pa1200
+endef
+TARGET_DEVICES += plasmacloud_pa1200
+
+define Device/plasmacloud_pa2200
+	$(call Device/FitImageLzma)
+	DEVICE_VENDOR := Plasma Cloud
+	DEVICE_MODEL := PA2200
+	SOC := qcom-ipq4019
+	DEVICE_DTS_CONFIG := config@pc.pa2200
+	BLOCKSIZE := 64k
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+	IMAGE_SIZE := 15552k
+	IMAGES += factory.bin
+	IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=PA2200
+	IMAGE/sysupgrade.bin/squashfs := append-rootfs | pad-rootfs | sysupgrade-tar rootfs=$$$$@ | append-metadata
+	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct ipq-wifi-plasmacloud-pa2200 uboot-envtools
+endef
+TARGET_DEVICES += plasmacloud_pa2200
+
 define Device/qcom_ap-dk01.1-c1
 	DEVICE_VENDOR := Qualcomm Atheros
 	DEVICE_MODEL := AP-DK01.1
