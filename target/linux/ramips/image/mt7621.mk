@@ -426,6 +426,22 @@ define Device/elecom_wrc-gs
   DEVICE_PACKAGES := kmod-mt7615e kmod-mt7615-firmware
 endef
 
+define Device/elecom_wrc-1167gs2-b
+  $(Device/elecom_wrc-gs)
+  IMAGE_SIZE := 11264k
+  DEVICE_MODEL := WRC-1167GS2-B
+  ELECOM_HWNAME := WRC-1167GS2
+endef
+TARGET_DEVICES += elecom_wrc-1167gs2-b
+
+define Device/elecom_wrc-1167gst2
+  $(Device/elecom_wrc-gs)
+  IMAGE_SIZE := 24576k
+  DEVICE_MODEL := WRC-1167GST2
+  ELECOM_HWNAME := WRC-1167GST2
+endef
+TARGET_DEVICES += elecom_wrc-1167gst2
+
 define Device/elecom_wrc-1750gs
   $(Device/elecom_wrc-gs)
   IMAGE_SIZE := 11264k
